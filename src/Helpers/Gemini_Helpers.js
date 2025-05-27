@@ -37,7 +37,7 @@ export const generateImage = async (text = '', setIsLoading = null,) => {
         };
         if (setIsLoading) setIsLoading(true);
         aiGenerator("gemini-2.0-flash-preview-image-generation", text, imageConfig).then((response) => {
-            console.log(response);
+            // console.log(response);
             for (const part of response.candidates[0].content.parts) {
                 // Based on the part type, either show the text or save the image
                 if (part.text) {

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import CircularProgress from "@mui/material/CircularProgress";
+import { CircularProgress, TextField, Button } from "@mui/material";
+import SearchBar from "./SearchBar";
 import { generateText, generateImage } from "../Helpers/Gemini_Helpers";
+import { isEmpty } from "lodash";
 
 function Home() {
   const [imageUrl, setImageUrl] = useState("");
@@ -23,49 +25,56 @@ function Home() {
 
   useEffect(() => {}, [imageUrl]);
   return (
-    <div className="App">
-      <div>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
-        >
-          <input
-            required
-            disabled={isLoading ? true : false}
-            type="text"
-            value={imageDescription}
-            onChange={(e) => {
+    <>
+      <div className="ai-image-generator">
+        <div className="header">
+          AI Image <span>generator</span>
+          <form
+            onSubmit={(e) => {
               e.preventDefault();
-              setImageDescription(e.target.value);
+              handleSubmit();
             }}
-          />
-          <button type="submit" disabled={isLoading ? true : false}>
-            Generate
-          </button>
-        </form>
-      </div>
-
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <div>
-          {imageUrl != "" ? (
-            <>
-              <img
-                src={`data:image/png;base64,${imageUrl}`}
-                alt="From API"
-                style={{ width: "400px", height: "auto" }} // optional styling
-              />{" "}
-              <div>{responseText}</div>
-            </>
-          ) : (
-            <>{responseText}</>
-          )}
+          >
+            <SearchBar
+              disabled={isLoading ? true : false}
+              value={imageDescription}
+              onChange={(e) => {
+                e.preventDefault();
+                setImageDescription(e.target.value);
+              }}
+            />
+          </form>
+          <div className="img-loading">
+            {isLoading ? (
+              <div className="loader">
+                <CircularProgress />
+              </div>
+            ) : (
+              <div className="image">
+                {!isEmpty(imageUrl) ? (
+                  <>
+                    <div>
+                      <img
+                        src={`data:image/png;base64,${imageUrl}`}
+                        alt="From API"
+                        style={{ width: "400px", height: "auto" }} // optional styling
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <></>
+                )}
+                {!isEmpty(responseText) ? (
+                  <div className="image-text">{responseText}</div>
+                ) : (
+                  <></>
+                )}
+              </div>
+            )}
+          </div>
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }
 
