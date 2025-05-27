@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CircularProgress, TextField, Button } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import SearchBar from "./SearchBar";
 import { generateText, generateImage } from "../Helpers/Gemini_Helpers";
 import { isEmpty } from "lodash";
