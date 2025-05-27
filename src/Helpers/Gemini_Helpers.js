@@ -13,14 +13,14 @@ const aiGenerator = async (model = '', text, modelConfig) => {
         contents: contentText,
         ...(modelConfig && (modelConfig))
     });
-    console.log(response);
+    // console.log(response);
     return response;
 
 };
 
 export const generateText = async (text = '') => {
     aiGenerator(text).then((response) => {
-        console.log(response.text);
+        // console.log(response.text);
         return response.text;
     });
 
@@ -42,10 +42,10 @@ export const generateImage = async (text = '', setIsLoading = null,) => {
                 // Based on the part type, either show the text or save the image
                 if (part.text) {
                     imageText = (part.text);
-                    console.log(imageText);
+                    // console.log(imageText);
                 } else if (part.inlineData) {
                     image = part.inlineData.data;
-                    console.log(image);
+                    // console.log(image);
 
                 }
                 if (setIsLoading) setIsLoading(false);

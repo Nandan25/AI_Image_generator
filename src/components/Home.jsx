@@ -14,6 +14,7 @@ function Home() {
   };
 
   const handleSubmit = async () => {
+    console.log(imageDescription);
     generateImage(imageDescription, setIsLoading).then((response) => {
       setResponseText(response[0]);
       setImageUrl(response[1]);
@@ -24,21 +25,26 @@ function Home() {
   return (
     <div className="App">
       <div>
-        <input
-          disabled={isLoading ? true : false}
-          type="text"
-          value={imageDescription}
-          onChange={(e) => {
+        <form
+          onSubmit={(e) => {
             e.preventDefault();
-            setImageDescription(e.target.value);
+            handleSubmit();
           }}
-        />
-        <button
-          disabled={isLoading ? true : false}
-          onClick={() => handleSubmit()}
         >
-          Generate
-        </button>
+          <input
+            required
+            disabled={isLoading ? true : false}
+            type="text"
+            value={imageDescription}
+            onChange={(e) => {
+              e.preventDefault();
+              setImageDescription(e.target.value);
+            }}
+          />
+          <button type="submit" disabled={isLoading ? true : false}>
+            Generate
+          </button>
+        </form>
       </div>
 
       {isLoading ? (
