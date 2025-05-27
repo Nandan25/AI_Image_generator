@@ -9,7 +9,6 @@ function SearchBar({ disabled, imageDescription, onChange }) {
           required
           className="search-input"
           label="Search"
-          placeholder="Briefly describe the image you want to search"
           disabled={disabled}
           value={imageDescription}
           onChange={(e) => {

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { CircularProgress } from "@mui/material";
+import ImageComponent from "./ImageComponent";
 import SearchBar from "./SearchBar";
 import { generateText, generateImage } from "../Helpers/Gemini_Helpers";
-import { isEmpty } from "lodash";
 
 function Home() {
   const [imageUrl, setImageUrl] = useState("");
@@ -29,6 +28,11 @@ function Home() {
       <div className="ai-image-generator">
         <div className="header">
           AI Image <span>generator</span>
+          <ImageComponent
+            isLoading={isLoading}
+            imageUrl={imageUrl}
+            responseText={responseText}
+          />
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -44,34 +48,6 @@ function Home() {
               }}
             />
           </form>
-          <div className="img-loading">
-            {isLoading ? (
-              <div className="loader">
-                <CircularProgress />
-              </div>
-            ) : (
-              <div className="image">
-                {!isEmpty(imageUrl) ? (
-                  <>
-                    <div>
-                      <img
-                        src={`data:image/png;base64,${imageUrl}`}
-                        alt="From API"
-                        style={{ width: "400px", height: "auto" }} // optional styling
-                      />
-                    </div>
-                  </>
-                ) : (
-                  <></>
-                )}
-                {!isEmpty(responseText) ? (
-                  <div className="image-text">{responseText}</div>
-                ) : (
-                  <></>
-                )}
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </>
