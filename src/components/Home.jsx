@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ImageComponent from "./ImageComponent";
 import SearchBar from "./SearchBar";
 import { generateImage } from "../Helpers/Gemini_Helpers";
@@ -9,11 +9,6 @@ function Home() {
   const [imageDescription, setImageDescription] = useState("");
   const [responseText, setResponseText] = useState("");
 
-  const resetData = () => {
-    setImageDescription("");
-    setResponseText("");
-  };
-
   const handleSubmit = async () => {
     console.log(imageDescription);
     generateImage(imageDescription, setIsLoading).then((response) => {
@@ -22,7 +17,6 @@ function Home() {
     });
   };
 
-  useEffect(() => {}, [imageUrl]);
   return (
     <>
       <div className="ai-image-generator">
