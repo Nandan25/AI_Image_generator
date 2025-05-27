@@ -1,7 +1,8 @@
+import React from "react";
 import { IconButton } from "@mui/material";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 
-function SearchBar({ disabled, imageDescription, onChange }) {
+const SearchBar = React.memo(({ disabled, imageDescription, onChange }) => {
   return (
     <>
       <div className="search-box">
@@ -21,6 +22,6 @@ function SearchBar({ disabled, imageDescription, onChange }) {
       </div>
     </>
   );
-}
+});
 
 export default SearchBar;

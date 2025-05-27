@@ -1,7 +1,8 @@
+import React from "react";
 import { isEmpty } from "lodash";
 import { CircularProgress } from "@mui/material";
 
-function ImageComponent({ isLoading, imageUrl, responseText }) {
+const ImageComponent = React.memo(({ isLoading, imageUrl, responseText }) => {
   return (
     <>
       <div className="img-loading">
@@ -38,6 +39,5 @@ function ImageComponent({ isLoading, imageUrl, responseText }) {
       </div>
     </>
   );
-}
-
+});
 export default ImageComponent;
