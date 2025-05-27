@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ImageComponent from "./ImageComponent";
 import SearchBar from "./SearchBar";
-import { generateText, generateImage } from "../Helpers/Gemini_Helpers";
+import { generateImage } from "../Helpers/Gemini_Helpers";
 
 function Home() {
   const [imageUrl, setImageUrl] = useState("");
